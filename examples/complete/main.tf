@@ -24,7 +24,7 @@ resource "aws_route53_zone" "private_dns_zone" {
 
 module "ses" {
   source = "../../"
-  
+
   zone_id       = aws_route53_zone.private_dns_zone.zone_id
   verify_dkim   = var.verify_dkim
   verify_domain = var.verify_domain

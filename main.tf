@@ -81,19 +81,19 @@ resource "aws_iam_user_group_membership" "ses_user" {
 }
 
 module "ses_user" {
-  source  = "SevenPicoForks/iam-system-user/aws"
+  source  = "registry.terraform.io/SevenPicoForks/iam-system-user/aws"
   version = "2.0.0"
   enabled = local.create_user_enabled
 
   iam_access_key_max_age = var.iam_access_key_max_age
-  pgp_key = null
-  context = module.context.self
+  pgp_key                = var.pgp_key
+  context                = module.context.self
 }
 
 
 resource "aws_iam_user_policy" "sending_emails" {
   #bridgecrew:skip=BC_AWS_IAM_16:Skipping `Ensure IAM policies are attached only to groups or roles` check because this module intentionally attaches IAM policy directly to a user.
-  count = local.create_user_enabled && ! local.create_group_enabled ? 1 : 0
+  count = local.create_user_enabled && !local.create_group_enabled ? 1 : 0
 
   name   = module.context.id
   policy = join("", data.aws_iam_policy_document.ses_policy.*.json)
