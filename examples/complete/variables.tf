@@ -1,8 +1,4 @@
 
-variable "domain" {
-  description = "The domain to create the SES identity for."
-  type        = string
-}
 
 variable "zone_id" {
   type        = string

@@ -5,14 +5,14 @@ Create SES domain identity and verify it with Route53 DNS records
 resource "aws_ses_domain_identity" "ses_domain" {
   count = module.context.enabled ? 1 : 0
 
-  domain = var.domain
+  domain = module.context.domain_name
 }
 
 resource "aws_route53_record" "amazonses_verification_record" {
   count = module.context.enabled && var.verify_domain ? 1 : 0
 
   zone_id = var.zone_id
-  name    = "_amazonses.${var.domain}"
+  name    = "_amazonses.${module.context.domain_name}"
   type    = "TXT"
   ttl     = "600"
   records = [join("", aws_ses_domain_identity.ses_domain.*.verification_token)]
@@ -28,7 +28,7 @@ resource "aws_route53_record" "amazonses_dkim_record" {
   count = module.context.enabled && var.verify_dkim ? 3 : 0
 
   zone_id = var.zone_id
-  name    = "${element(aws_ses_domain_dkim.ses_domain_dkim.0.dkim_tokens, count.index)}._domainkey.${var.domain}"
+  name    = "${element(aws_ses_domain_dkim.ses_domain_dkim.0.dkim_tokens, count.index)}._domainkey.${module.context.domain_name}"
   type    = "CNAME"
   ttl     = "600"
   records = ["${element(aws_ses_domain_dkim.ses_domain_dkim.0.dkim_tokens, count.index)}.dkim.amazonses.com"]
