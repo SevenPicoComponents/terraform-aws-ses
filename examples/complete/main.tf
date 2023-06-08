@@ -7,12 +7,11 @@ provider "awsutils" {
 }
 
 module "vpc" {
-  source  = "cloudposse/vpc/aws"
-  version = "0.18.1"
+  source  = "registry.terraform.io/SevenPico/vpc/aws"
+  version = "3.0.0"
 
-  cidr_block = "172.16.0.0/16"
-
-  context = module.this.context
+  ipv4_primary_cidr_block = "172.16.0.0/16"
+  context = module.context.self
 }
 
 resource "aws_route53_zone" "private_dns_zone" {
@@ -20,7 +19,7 @@ resource "aws_route53_zone" "private_dns_zone" {
   vpc {
     vpc_id = module.vpc.vpc_id
   }
-  tags = module.this.tags
+  tags = module.context.tags
 }
 
 module "ses" {
@@ -31,5 +30,5 @@ module "ses" {
   verify_dkim   = var.verify_dkim
   verify_domain = var.verify_domain
 
-  context = module.this.context
+  context = module.context.self
 }

@@ -1,7 +1,3 @@
-variable "region" {
-  type        = string
-  description = "AWS region"
-}
 
 variable "domain" {
   description = "The domain to create the SES identity for."
