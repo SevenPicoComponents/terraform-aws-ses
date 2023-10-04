@@ -69,16 +69,6 @@ variable "ssm_ignore_value_changes" {
   description = "Set to true to ignore Parameter store value changes when. Default is false"
 }
 
-variable "kms_key_deletion_window_in_days" {
-  type    = number
-  default = 30
-}
-
-variable "kms_key_enable_key_rotation" {
-  type    = bool
-  default = true
-}
-
 variable "ssm_ses_smtp_password_enabled" {
   type        = bool
   description = "Whether or not to create an SES SMTP password"
