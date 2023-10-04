@@ -81,13 +81,24 @@ resource "aws_iam_user_group_membership" "ses_user" {
 }
 
 module "ses_user" {
-  source  = "registry.terraform.io/SevenPicoForks/iam-system-user/aws"
-  version = "2.0.0"
-  enabled = local.create_user_enabled
+  source     = "registry.terraform.io/SevenPicoForks/iam-system-user/aws"
+  version    = "2.0.2"
+  context    = module.context.self
+  enabled    = module.context.enabled && local.create_user_enabled
+  attributes = ["ses", "user"]
 
-  iam_access_key_max_age = var.iam_access_key_max_age
-  pgp_key                = var.pgp_key
-  context                = module.context.self
+  iam_access_key_max_age        = var.iam_access_key_max_age
+  create_iam_access_key         = var.create_iam_access_key
+  force_destroy                 = var.force_destroy
+  inline_policies               = var.inline_policies
+  inline_policies_map           = var.inline_policies_map
+  permissions_boundary          = var.permissions_boundary
+  path                          = var.path
+  policy_arns                   = var.policy_arns
+  policy_arns_map               = var.policy_arns_map
+  ssm_enabled                   = var.ssm_enabled
+  ssm_ignore_value_changes      = var.ssm_ignore_value_changes
+  ssm_ses_smtp_password_enabled = var.ssm_ses_smtp_password_enabled
 }
 
 
