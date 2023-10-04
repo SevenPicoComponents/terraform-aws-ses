@@ -82,7 +82,7 @@ resource "aws_iam_user_group_membership" "ses_user" {
 
 module "ses_user" {
   source     = "registry.terraform.io/SevenPicoForks/iam-system-user/aws"
-  version    = "2.0.1"
+  version    = "2.0.2"
   context    = module.context.self
   enabled    = module.context.enabled && local.create_user_enabled
   attributes = ["ses", "user"]
