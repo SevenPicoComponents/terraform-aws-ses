@@ -66,5 +66,21 @@ variable "ses_user_enabled" {
 variable "pgp_key" {
   type        = string
   description = "Provide a base-64 encoded PGP public key, or a keybase username in the form `keybase:username`. Required to encrypt password."
-  default = ""
+  default     = ""
+}
+
+variable "ssm_ignore_value_changes" {
+  type        = bool
+  default     = false
+  description = "Set to true to ignore Parameter store value changes when. Default is false"
+}
+
+variable "kms_key_deletion_window_in_days" {
+  type    = number
+  default = 30
+}
+
+variable "kms_key_enable_key_rotation" {
+  type    = bool
+  default = true
 }

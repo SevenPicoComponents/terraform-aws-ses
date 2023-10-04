@@ -99,3 +99,60 @@ resource "aws_iam_user_policy" "sending_emails" {
   policy = join("", data.aws_iam_policy_document.ses_policy.*.json)
   user   = module.ses_user.user_name
 }
+
+# ------------------------------------------------------------------------------
+# KMS Key
+# ------------------------------------------------------------------------------
+module "kms_key" {
+  source  = "SevenPicoForks/kms-key/aws"
+  version = "2.0.0"
+  context = module.context.self
+  enabled = module.context.enabled && local.create_user_enabled
+
+  customer_master_key_spec = "SYMMETRIC_DEFAULT"
+  deletion_window_in_days  = var.kms_key_deletion_window_in_days
+  description              = "KMS key for CI/CD ${module.context.id}"
+  enable_key_rotation      = var.kms_key_enable_key_rotation
+  key_usage                = "ENCRYPT_DECRYPT"
+  multi_region             = false
+}
+
+
+# ------------------------------------------------------------------------------
+# SSM Parameter Store Users Secrets Credential
+# ------------------------------------------------------------------------------
+module "store_write" {
+  source  = "cloudposse/ssm-parameter-store/aws"
+  version = "0.9.1"
+
+  count = module.context.enabled && local.create_user_enabled ? 1 : 0
+
+  ignore_value_changes = var.ssm_ignore_value_changes
+  kms_arn              = module.kms_key.key_arn
+  parameter_write = [
+    {
+      name        = "/system_user/${module.ses_user.user_name}/access_key_id"
+      value       = try(join("", module.ses_user.access_key_id), "unset")
+      type        = "SecureString"
+      overwrite   = true
+      description = "The AWS_ACCESS_KEY_ID for the ${module.ses_user.user_name} user."
+    },
+    {
+      name        = "/system_user/${module.ses_user.user_name}/ses_smtp_password"
+      value       = try(join("", module.ses_user.ses_smtp_password_v4), "unset")
+      type        = "SecureString"
+      overwrite   = true
+      description = "The SES_SMTP_PASSWORDv4 for the ${module.ses_user.user_name} user."
+    },
+    {
+      name        = "/system_user/${module.ses_user.user_name}/"
+      value       = try(join("", module.ses_user.secret_access_key), "unset")
+      type        = "SecureString"
+      overwrite   = true
+      description = "The AWS_SECRET_ACCESS_KEY for the ${module.ses_user.user_name} user."
+    },
+  ]
+
+  context = module.context.legacy
+
+}
