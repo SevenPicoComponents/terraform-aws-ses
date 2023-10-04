@@ -81,9 +81,10 @@ resource "aws_iam_user_group_membership" "ses_user" {
 }
 
 module "ses_user" {
-  source  = "registry.terraform.io/SevenPicoForks/iam-system-user/aws"
-  version = "2.0.0"
-  enabled = local.create_user_enabled
+  source     = "registry.terraform.io/SevenPicoForks/iam-system-user/aws"
+  version    = "2.0.0"
+  enabled    = module.context.enabled && local.create_user_enabled
+  attributes = ["ses", "user"]
 
   iam_access_key_max_age = var.iam_access_key_max_age
   pgp_key                = var.pgp_key
