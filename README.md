@@ -43,12 +43,6 @@ The table below correctly indicates which inputs are required.
 |------|---------|
 | <a name="provider_aws"></a> [aws](#provider\_aws) | >= 2.0 |
 
-## Modules
-
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_ses_user"></a> [ses\_user](#module\_ses\_user) | sevenpicocomponents/iam-system-user/aws | 0.23.2 |
-| <a name="module_this"></a> [this](#module\_this) | sevenpicocomponents/label/null | 0.25.0 |
 
 ## Resources
 
@@ -137,20 +131,3 @@ KIND, either express or implied.  See the License for the
 specific language governing permissions and limitations
 under the License.
 ```
-
-## Security & Compliance
-
-Security scanning is graciously provided by Bridgecrew. Bridgecrew is the leading fully hosted, cloud-native solution providing continuous Terraform security and compliance.
-
-| Benchmark | Description |
-|--------|---------------|
-| [![Infrastructure Security](https://www.bridgecrew.cloud/badges/github/sevenpicocomponents/terraform-aws-ses/general)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=sevenpicocomponents%2Fterraform-aws-ses&benchmark=INFRASTRUCTURE+SECURITY) | Infrastructure Security Compliance |
-| [![CIS KUBERNETES](https://www.bridgecrew.cloud/badges/github/sevenpicocomponents/terraform-aws-ses/cis_kubernetes)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=sevenpicocomponents%2Fterraform-aws-ses&benchmark=CIS+KUBERNETES+V1.5) | Center for Internet Security, KUBERNETES Compliance |
-| [![CIS AWS](https://www.bridgecrew.cloud/badges/github/sevenpicocomponents/terraform-aws-ses/cis_aws)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=sevenpicocomponents%2Fterraform-aws-ses&benchmark=CIS+AWS+V1.2) | Center for Internet Security, AWS Compliance |
-| [![CIS AZURE](https://www.bridgecrew.cloud/badges/github/sevenpicocomponents/terraform-aws-ses/cis_azure)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=sevenpicocomponents%2Fterraform-aws-ses&benchmark=CIS+AZURE+V1.1) | Center for Internet Security, AZURE Compliance |
-| [![PCI-DSS](https://www.bridgecrew.cloud/badges/github/sevenpicocomponents/terraform-aws-ses/pci)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=sevenpicocomponents%2Fterraform-aws-ses&benchmark=PCI-DSS+V3.2) | Payment Card Industry Data Security Standards Compliance |
-| [![NIST-800-53](https://www.bridgecrew.cloud/badges/github/sevenpicocomponents/terraform-aws-ses/nist)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=sevenpicocomponents%2Fterraform-aws-ses&benchmark=NIST-800-53) | National Institute of Standards and Technology Compliance |
-| [![ISO27001](https://www.bridgecrew.cloud/badges/github/sevenpicocomponents/terraform-aws-ses/iso)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=sevenpicocomponents%2Fterraform-aws-ses&benchmark=ISO27001) | Information Security Management System, ISO/IEC 27001 Compliance |
-| [![SOC2](https://www.bridgecrew.cloud/badges/github/sevenpicocomponents/terraform-aws-ses/soc2)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=sevenpicocomponents%2Fterraform-aws-ses&benchmark=SOC2)| Service Organization Control 2 Compliance |
-| [![CIS GCP](https://www.bridgecrew.cloud/badges/github/sevenpicocomponents/terraform-aws-ses/cis_gcp)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=sevenpicocomponents%2Fterraform-aws-ses&benchmark=CIS+GCP+V1.1) | Center for Internet Security, GCP Compliance |
-| [![HIPAA](https://www.bridgecrew.cloud/badges/github/sevenpicocomponents/terraform-aws-ses/hipaa)](https://www.bridgecrew.cloud/link/badge?vcs=github&fullRepo=sevenpicocomponents%2Fterraform-aws-ses&benchmark=HIPAA) | Health Insurance Portability and Accountability Compliance |
